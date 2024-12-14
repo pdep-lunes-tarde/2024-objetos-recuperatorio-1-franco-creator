@@ -9,6 +9,10 @@ class Mago
     var tipoMago
     const indicePoderInnato
 
+    const esGremio = false
+
+    method esGremio() = esGremio 
+
     method puntosEnergiaMagica() = puntosEnergiaMagica
 
     method resistMagica() = resistMagica
@@ -47,6 +51,11 @@ class Mago
   method disminuirPuntosEnergiaMagica(aDisminuir) {
     puntosEnergiaMagica -= aDisminuir
   }
+
+  method aumentarPuntosEnergiaMagicaLider(aAumentar)
+    {
+       puntosEnergiaMagica += aAumentar
+    }
 }
 
 
