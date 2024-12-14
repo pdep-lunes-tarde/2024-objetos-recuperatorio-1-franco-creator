@@ -4,9 +4,20 @@ class Gremio
 
     method esGremio() = esGremio 
 
+    //en esta lista por el punto 3 puede tener tambien gremios
     const magos = new List()
 
+    method magos() = magos
+
     method esGremio(valorDeVerdad) = valorDeVerdad 
+
+//para el punto 1 parte b
+    method initialize() {
+      if(magos.size() < 2)
+      {
+        self.error("el gremio debe de tener por lo menos dos miembros")
+      }
+    }
     
     method poderTotal() = magos.sum({mago => mago.poderTotal()})
 
@@ -14,8 +25,8 @@ class Gremio
 
     method puntosEnergiaMagica() = magos.sum({mago => mago.puntosEnergiaMagica()})
 
-    //falta modelar el el puntito 3 de desafia
 
+//punto 2 parte b
     //el oponente puede ser un mago o gremio
     method desafiaA(oponente)
     {
@@ -23,7 +34,6 @@ class Gremio
         {
             if(self.esVencido(oponente))
             {
-                //me falta la cantidad a aumentar
             oponente.magos().forEach({mago => self.magoLider().desafiaA(mago)})
             }
             
@@ -43,14 +53,19 @@ class Gremio
 
     method esVencido(oponente) = self.poderTotal() > oponente.resistMagica()
 
-    method magoLider() = magos.max({mago => mago.poderTotal()})
 
+// sin el punto 3 de la parte b es asi el magoLider
+//method magoLider() = magos.max({mago=> mago.poderTotal()})
+//el if es por el punto 3 de la parte b
+    method magoLider(){ 
+    //si hay un gremio dentro del gremio entra al if
+    if(magos.contains({mago => mago.esGremio()}))
+    {
+        const gremioDentroDelGremio = magos.find({mago => mago.esGremio()})
+       return gremioDentroDelGremio.magos().max({mago => mago.poderTotal()})
+    }
+    return magos.max({mago=> mago.poderTotal()})
     
+    }
 
-
-}
-
-object initialize {
-  
-  const gremio = new Gremio(magos = [])
 }

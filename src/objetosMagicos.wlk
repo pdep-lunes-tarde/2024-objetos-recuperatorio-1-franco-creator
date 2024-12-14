@@ -1,4 +1,3 @@
-//estos van con herencia?
 
 class Varita {
    const basePoder
@@ -20,7 +19,7 @@ class Varita {
 class TunicaComun {
     const basePoder
     method cantidadPoder(mago) {
-    return mago.resistMagica() * 2
+    return ((mago.resistMagica() * 2) + basePoder)
     }
 }
 

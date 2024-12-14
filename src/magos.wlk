@@ -1,5 +1,5 @@
-object prueba {}
-
+/*algo de como lo implementé: si hay algun comentario con alguna pregunta(que me parece que los borre todos)
+no importan ya que yo cuando voy resolviendo el problema voy haciendo anotaciones de dudas y no se si me olvidé de borrar alguno*/
 class Mago
 {
     const nombre
@@ -21,6 +21,7 @@ class Mago
 
     method tipoMago() = tipoMago
 
+//punto 1 parte a
   method poderTotal()
   {
     return self.poderObjetosMagicos() * self.poderInnato()
@@ -30,23 +31,29 @@ class Mago
     return objetosMagicos.sum({objetoMagico => objetoMagico.cantidadPoder(self)})
   }
 
-//esto probarlo luego
   method poderInnato()
   {
     if(!indicePoderInnato.between(1, 10))
     {
-      self.error("el indice del poder innato no esta dentro del rango solicitado")
+      self.error("el indice del poder innato no esta dentro del rango establecido")
     } 
     return indicePoderInnato
   }
 
-  method desafiaA(otroMago) {
-    if(otroMago.tipoMago().esVencido(self, otroMago))
+
+//punto 2 parte A
+//otroMago es el mago al que se esta atacando
+  method desafiaA(otroMago,cantidadPuntosARobarPorAtacante) {
+    if(otroMago.tipoMago().esVencido(self, otroMago) &&  otroMago.verSiRobarPuntosAOtroMago(cantidadPuntosARobarPorAtacante,otroMago))
     {
       puntosEnergiaMagica += otroMago.puntosEnergiaMagica()
       otroMago.tipoMago().pierdePuntosEnergiaMagica(otroMago)
     }
   }
+
+//analiza si tiene el mago al que se ataca la cantidad de puntos que se quiere robar
+  method verSiRobarPuntosAOtroMago(cantidadPuntosARobar,otroMago) = cantidadPuntosARobar <= otroMago.puntosEnergiaMagica()
+
 
   method disminuirPuntosEnergiaMagica(aDisminuir) {
     puntosEnergiaMagica -= aDisminuir
